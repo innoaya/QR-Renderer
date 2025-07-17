@@ -18,10 +18,7 @@ This project provides a simple, cost‑effective way to render QR codes entirely
 ## Live Demo
 
 Try it now:
-
-```
-https://innoaya.github.io/QR-Renderer/?value=hello
-```
+[https://innoaya.github.io/QR-Renderer/?value=https://github.com/innoaya](https://innoaya.github.io/QR-Renderer/?value=https://github.com/innoaya)
 
 ## Usage
 
