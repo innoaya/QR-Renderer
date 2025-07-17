@@ -1,23 +1,48 @@
 # QR Code Renderer
 
-This tiny project renders a QR code based on the `value` query parameter provided in the URL. For rendering QR, https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js is used. I figured out doing this is the most cost effective way to render QR image using github static hosting.
+A minimal static web page that generates QR codes client‑side using a query parameter. Perfect for free, zero‑build hosting on GitHub Pages or any static server.
 
-## Usage
+---
 
-1. Start the application.
-2. Access the app in your browser with a URL like:
+## Overview
 
-  ```
-  http://localhost:PORT/?value=your-string-here
-  ```
-
-3. The page will display a QR code representing the string passed in the `value` query parameter.
+This project provides a simple, cost‑effective way to render QR codes entirely in the browser. It leverages the [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) library via CDN to produce SVG‑based QR images—no build tools or back‑end required.
 
 ## Features
 
-- Renders a QR code for any string provided via the `value` query parameter.
-- Simple and minimal interface.
+* **Dynamic encoding**: Generates a QR for any string passed via the `value` query parameter.
+* **Lightweight**: Single HTML file plus a \~3 KB CDN script.
+* **Zero build step**: Just HTML/CSS/JS—deploy as static files.
+* **Free hosting‑friendly**: Works out‑of‑the‑box on GitHub Pages, Netlify, S3, etc.
 
-## Example
+## Live Demo
 
-If you visit:
+Try it now:
+
+```
+https://innoaya.github.io/QR-Renderer/?value=hello
+```
+
+## Usage
+
+1. **Clone or fork** this repo:
+
+   ```bash
+   git clone https://github.com/<YOUR_ORG_OR_USERNAME>/QR-Renderer.git
+   ```
+2. **Enable** GitHub Pages in your repository settings (source: `main` branch, folder `/`).
+3. **Open** in your browser with a `value` parameter:
+
+   ```
+   https://<YOUR_ORG_OR_USERNAME>.github.io/QR-Renderer/?value=Hello%20World
+   ```
+
+## Customization
+
+* **Adjust size**: Modify the `cellSize` and `margin` options in the script config.
+* **Styling**: Tweak the CSS in the `<style>` block for fonts, layout, or theming.
+* **Self‑host library**: Replace the CDN URL with a local copy of `qrcode.min.js` if desired.
+
+## License
+
+This project is open‑source under the [MIT License](LICENSE). Feel free to use and adapt it for your own needs.
