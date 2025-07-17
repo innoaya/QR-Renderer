@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Code</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      margin-top: 2rem;
+    }
+    #qrcode { margin: 1rem; }
+    #message { color: #555; }
+  </style>
+  <!-- Pure-JS QR generator loaded from CDN -->
+  <script src="qrcode.min.js"></script>
+</head>
+<body>
+  <div id="qrcode"></div>
+  <div id="message"></div>
+
+  <script>
+    // Read `value` from URL, e.g. ?value=Hello
+    const params = new URLSearchParams(window.location.search);
+    const value = params.get('value');
+    const container = document.getElementById('qrcode');
+    const messageEl = document.getElementById('message');
+
+    if (!value) {
+      messageEl.textContent = '❗️ Provide a “value” query parameter, e.g. ?value=Hello';
+    } else {
+      // Generate QR using inlined library interface
+      const qr = qrcode(0, 'H');        // version 0 = auto
+      qr.addData(value);
+      qr.make();
+      // Render as SVG
+      const svgTag = qr.createSvgTag({cellSize: 4, margin: 0});
+      container.innerHTML = svgTag;
+    }
+  </script>
+</body>
+</html>
