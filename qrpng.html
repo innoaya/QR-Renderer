@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QR as PNG</title>
+  <script src="qrcode.min.js"></script>
+</head>
+<body>
+<script>
+  // 1) grab the `value` param
+  const params = new URLSearchParams(location.search);
+  const value  = params.get('value');
+  if (!value) {
+    document.body.textContent = 'Error: missing ?value=…';
+    throw new Error('missing value');
+  }
+
+  // 2) build the QR “model”
+  const qr = qrcode(0, 'L');
+  qr.addData(value);
+  qr.make();
+
+  // 3) paint it into a canvas
+  const cellSize = 4, margin = 2;
+  const count    = qr.getModuleCount();
+  const size     = (count + margin*2) * cellSize;
+  const c        = Object.assign(document.createElement('canvas'), { width:size, height:size });
+  const ctx      = c.getContext('2d');
+  ctx.fillStyle = '#FFF';
+  ctx.fillRect(0,0,size,size);
+  ctx.fillStyle = '#000';
+  for (let r=0; r<count; r++) {
+    for (let cidx=0; cidx<count; cidx++) {
+      if (qr.isDark(r,cidx)) {
+        ctx.fillRect((cidx+margin)*cellSize, (r+margin)*cellSize, cellSize, cellSize);
+      }
+    }
+  }
+
+  // 4) redirect the browser to the PNG Data‑URL
+  window.location.href = c.toDataURL('image/png');
+</script>
+</body>
+</html>
